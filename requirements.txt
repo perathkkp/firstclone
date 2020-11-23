@@ -3,3 +3,7 @@
 azure-functions
 azure-storage-blob
 asyncio
+lxml
+numpy
+pandas
+beautifulsoup4

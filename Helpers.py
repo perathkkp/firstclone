@@ -4,6 +4,8 @@ import cgi
 import requests
 from azure.storage.blob import BlobServiceClient, BlobClient
 import subprocess
+from urllib.request import urlopen
+from lxml import etree,html
 
 
 def is_downloadable(url: str):
@@ -63,3 +65,11 @@ def capture_pdf(url, outputFilePath):
     # result = subprocess.check_output(
     #     "python ./Util/capture_pdf.py '{0}' '{1}'".format(url, outputFilePath), shell=True, encoding='utf-8')
     # return list(result.replace('\n', '').split('|'))
+
+def extract_element(url, xpath):
+    page = requests.get(url)
+    tree = html.fromstring(page.content) 
+    root = html.tostring(tree)
+    items = tree.xpath(xpath)
+    return items
+
